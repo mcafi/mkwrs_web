@@ -1,6 +1,13 @@
+import db from "@/utils/firestore";
+import { collection, getDocs } from "firebase/firestore";
 import Image from "next/image";
 
 export default function Home() {
+  getDocs(collection(db, "track")).then((querySnapshot) => {
+    querySnapshot.forEach((doc) => {
+      console.log(doc.id, " => ", doc.data());
+    });
+  });
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
